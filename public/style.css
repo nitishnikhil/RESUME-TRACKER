@@ -26,12 +26,15 @@ body {
 .login-card h1 {
   color: #1a4ed8;
   margin-bottom: 10px;
+  text-align: center;
 }
 
 .login-card p {
   color: #666;
-  margin-bottom: 30px;
+  margin: 20px auto 30px;
   font-size: 16px;
+  text-align: center;
+  width: 100%;
 }
 
 .login-buttons {
