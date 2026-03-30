@@ -6,24 +6,71 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Login Page -->
+  <div id="loginPage" class="login-container">
+    <div class="login-card">
+      <h1>Resume Tracker</h1>
+      <p>Select your role to continue</p>
+      <div class="login-buttons">
+        <button id="candidateBtn" class="login-btn candidate-btn">Upload Resume</button>
+        <button id="adminBtn" class="login-btn admin-btn">Admin Login</button>
+      </div>
+    </div>
+  </div>
 
-  <div class="container">
-    <h1>Resume Tracker</h1>
+  <!-- Candidate Upload Page -->
+  <div id="candidatePage" class="page" style="display: none;">
+    <div class="container">
+      <div class="header">
+        <h1>Resume Tracker - Upload Resume</h1>
+        <button id="logoutCandidateBtn" class="logout-btn">Logout</button>
+      </div>
 
-    <!-- Upload Form -->
-    <form id="resumeForm">
-      <input type="text" name="name" placeholder="Full Name" required />
-      <input type="email" name="email" placeholder="Email" required />
-      <input type="text" name="skills" placeholder="Skills (Java, SQL, Azure)" />
-      <input type="file" name="resume" required />
-      <button type="submit">Upload Resume</button>
-    </form>
+      <!-- Upload Form -->
+      <form id="resumeForm">
+        <input type="text" name="name" placeholder="Full Name" required />
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="text" name="skills" placeholder="Skills (Java, SQL, Azure)" required />
+        <input type="file" name="resume" required />
+        <button type="submit">Upload Resume</button>
+      </form>
 
-    <hr />
+      <hr />
 
-    <!-- Uploaded Resumes -->
-    <h2>Uploaded Resumes</h2>
-    <ul id="resumeList"></ul>
+      <!-- Uploaded Resumes -->
+      <h2>Uploaded Resumes</h2>
+      <ul id="resumeList"></ul>
+    </div>
+  </div>
+
+  <!-- Admin Page -->
+  <div id="adminPage" class="page" style="display: none;">
+    <div class="container">
+      <div class="header">
+        <h1>Resume Tracker - Admin Panel</h1>
+        <button id="logoutAdminBtn" class="logout-btn">Logout</button>
+      </div>
+
+      <!-- Search Section -->
+      <div class="search-section">
+        <h2>Search Candidates by Skills</h2>
+        <div class="search-box">
+          <input 
+            type="text" 
+            id="skillsSearchInput" 
+            placeholder="Enter skills (e.g., Java, Python, SQL)" 
+          />
+          <button id="searchBtn" class="search-btn">Search</button>
+          <button id="clearSearchBtn" class="clear-btn">Clear Search</button>
+        </div>
+      </div>
+
+      <hr />
+
+      <!-- Search Results -->
+      <h2>Candidates</h2>
+      <ul id="adminResumeList"></ul>
+    </div>
   </div>
 
   <script src="app.js"></script>

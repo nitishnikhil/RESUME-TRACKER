@@ -1,15 +1,128 @@
 body {
   font-family: Arial, sans-serif;
   background: #eaf2ff;
+  margin: 0;
+  padding: 0;
 }
 
+/* ===== LOGIN PAGE ===== */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.login-card {
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 350px;
+}
+
+.login-card h1 {
+  color: #1a4ed8;
+  margin-bottom: 10px;
+}
+
+.login-card p {
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
+.login-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.login-btn {
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.candidate-btn {
+  background: #1a4ed8;
+  color: white;
+}
+
+.candidate-btn:hover {
+  background: #163db3;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(26, 78, 216, 0.4);
+}
+
+.admin-btn {
+  background: #f97316;
+  color: white;
+}
+
+.admin-btn:hover {
+  background: #e8660a;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(249, 115, 22, 0.4);
+}
+
+/* ===== PAGES ===== */
+.page {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ===== COMMON CONTAINER ===== */
 .container {
-  width: 450px;
-  margin: 40px auto;
+  width: 550px;
+  margin: 20px auto;
   background: white;
   padding: 25px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  flex: 1;
+  text-align: center;
+}
+
+.logout-btn {
+  background: #ef4444;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  width: auto;
+  margin: 0;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
 }
 
 h1, h2 {
@@ -21,6 +134,19 @@ input, button {
   width: 100%;
   margin-top: 10px;
   padding: 10px;
+  font-size: 14px;
+}
+
+input {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+input:focus {
+  outline: none;
+  border-color: #1a4ed8;
+  box-shadow: 0 0 5px rgba(26, 78, 216, 0.3);
 }
 
 button {
@@ -29,24 +155,111 @@ button {
   border: none;
   cursor: pointer;
   border-radius: 5px;
+  font-weight: bold;
+  transition: all 0.3s ease;
 }
 
 button:hover {
   background: #163db3;
 }
 
+/* ===== SEARCH SECTION ===== */
+.search-section {
+  background: #f3f6ff;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.search-section h2 {
+  margin-top: 0;
+}
+
+.search-box {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.search-box input {
+  flex: 1;
+  margin: 0;
+}
+
+.search-btn {
+  flex: 0.5;
+  margin: 0;
+  background: #1a4ed8;
+}
+
+.search-btn:hover {
+  background: #163db3;
+}
+
+.clear-btn {
+  flex: 0.5;
+  margin: 0;
+  background: #6b7280;
+}
+
+.clear-btn:hover {
+  background: #4b5563;
+}
+
+/* ===== RESUME LIST ===== */
 ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 li {
+  margin-top: 15px;
+  background: #f3f6ff;
+  padding: 15px;
+  border-radius: 5px;
+  border-left: 4px solid #1a4ed8;
+  word-wrap: break-word;
+}
+
+/* ===== CANDIDATE CARD ===== */
+.candidate-card {
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
-  background: #f3f6ff;
-  padding: 10px;
+  align-items: center;
+  gap: 20px;
+}
+
+.candidate-info {
+  flex: 1;
+}
+
+.candidate-info h3 {
+  margin: 0 0 8px 0;
+  color: #1a4ed8;
+}
+
+.candidate-info p {
+  margin: 5px 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.download-link {
+  color: #1a4ed8;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 12px;
+  background: #e0e7ff;
   border-radius: 5px;
+  white-space: nowrap;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.download-link:hover {
+  background: #1a4ed8;
+  color: white;
 }
 
 a {
@@ -54,3 +267,10 @@ a {
   text-decoration: none;
   font-weight: bold;
 }
+
+hr {
+  border: none;
+  border-top: 2px solid #e0e7ff;
+  margin: 20px 0;
+}
+

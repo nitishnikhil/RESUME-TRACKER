@@ -1,7 +1,7 @@
 const express = require("express");
 const multer = require("multer");
 const { uploadToBlob } = require("../services/blobService");
-const { saveCandidate, getCandidates } = require("../services/cosmosService");
+const { saveCandidate, getCandidates, searchCandidatesBySkills } = require("../services/cosmosService");
 
 const router = express.Router();
 const upload = multer();
@@ -41,6 +41,25 @@ router.post("/upload", upload.single("resume"), async (req, res) => {
 router.get("/list", async (req, res) => {
   const data = await getCandidates();
   res.json(data);
+});
+
+// Search candidates by skills
+router.get("/search", async (req, res) => {
+  try {
+    const skills = req.query.skills;
+
+    if (!skills) {
+      return res.status(400).json({ error: "Skills parameter is required" });
+    }
+
+    console.log("Searching for skills:", skills);
+    const results = await searchCandidatesBySkills(skills);
+    console.log("Search results:", results);
+    res.json(results);
+  } catch (err) {
+    console.error("Search error:", err);
+    res.status(500).json({ error: err.message });
+  }
 });
 
 module.exports = router;

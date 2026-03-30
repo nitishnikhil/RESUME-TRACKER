@@ -20,4 +20,34 @@ async function getCandidates() {
   return resources;
 }
 
-module.exports = { saveCandidate, getCandidates };
+async function searchCandidatesBySkills(skillsQuery) {
+  try {
+    // Get all candidates
+    const { resources } = await container.items
+      .query("SELECT * FROM c")
+      .fetchAll();
+
+    // Filter candidates by skills (case-insensitive partial match)
+    const searchTerms = skillsQuery
+      .toLowerCase()
+      .split(",")
+      .map(s => s.trim())
+      .filter(s => s.length > 0);
+
+    const filteredCandidates = resources.filter(candidate => {
+      const candidateSkills = candidate.skills
+        ? candidate.skills.toLowerCase()
+        : "";
+
+      // Check if any search term matches any candidate skill
+      return searchTerms.some(term => candidateSkills.includes(term));
+    });
+
+    return filteredCandidates;
+  } catch (err) {
+    console.error("Error searching candidates:", err);
+    throw err;
+  }
+}
+
+module.exports = { saveCandidate, getCandidates, searchCandidatesBySkills };
