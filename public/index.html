@@ -6,6 +6,10 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Theme Toggle Button -->
+  <div class="theme-toggle-container">
+    <button id="themeToggleBtn" class="theme-toggle-btn" title="Toggle Dark Mode">🌙 Dark Mode</button>
+  </div>
   <!-- Login Page -->
   <div id="loginPage" class="login-container">
     <div class="login-card">
@@ -88,6 +92,32 @@
         <h1>Resume Tracker - Admin Panel</h1>
         <button id="logoutAdminBtn" class="logout-btn">Logout</button>
       </div>
+
+      <!-- Analytics Dashboard -->
+      <div class="analytics-dashboard">
+        <h2>📊 Analytics Dashboard</h2>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-number" id="totalResumes">0</div>
+            <div class="stat-label">Total Resumes</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number" id="weeksUploads">0</div>
+            <div class="stat-label">This Week</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number" id="monthUploads">0</div>
+            <div class="stat-label">This Month</div>
+          </div>
+        </div>
+        
+        <div class="skills-section">
+          <h3>🏆 Top 5 Most Common Skills</h3>
+          <div id="topSkillsList" class="skills-list"></div>
+        </div>
+      </div>
+
+      <hr />
 
       <!-- Search Section -->
       <div class="search-section">

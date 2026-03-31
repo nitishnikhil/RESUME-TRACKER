@@ -490,3 +490,260 @@ hr {
   transform: none;
 }
 
+/* ===== THEME TOGGLE ===== */
+.theme-toggle-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+}
+
+.theme-toggle-btn {
+  background: #1a4ed8;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  width: auto;
+  margin: 0;
+}
+
+.theme-toggle-btn:hover {
+  background: #163db3;
+  transform: scale(1.05);
+}
+
+/* ===== DARK MODE STYLES ===== */
+body.dark-mode {
+  background: #1a1a1a;
+  color: #e0e0e0;
+}
+
+body.dark-mode .login-container {
+  background: linear-gradient(135deg, #0f2d6b 0%, #1a0f3d 100%);
+}
+
+body.dark-mode .login-card {
+  background: #2a2a2a;
+  color: #e0e0e0;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .login-card h1 {
+  color: #5ba3ff;
+}
+
+body.dark-mode .login-card p {
+  color: #b0b0b0;
+}
+
+body.dark-mode .container {
+  background: #2a2a2a;
+  color: #e0e0e0;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3 {
+  color: #5ba3ff;
+}
+
+body.dark-mode input {
+  background: #3a3a3a;
+  color: #e0e0e0;
+  border-color: #555;
+}
+
+body.dark-mode input:focus {
+  border-color: #5ba3ff;
+  box-shadow: 0 0 5px rgba(91, 163, 255, 0.3);
+}
+
+body.dark-mode .search-section {
+  background: #3a3a3a;
+}
+
+body.dark-mode li {
+  background: #3a3a3a;
+  border-left-color: #5ba3ff;
+  color: #e0e0e0;
+}
+
+body.dark-mode .modal-content {
+  background: #2a2a2a;
+  color: #e0e0e0;
+}
+
+body.dark-mode .modal-content h2 {
+  color: #5ba3ff;
+}
+
+body.dark-mode .detail-section {
+  background: #3a3a3a;
+  color: #e0e0e0;
+}
+
+body.dark-mode .detail-section strong {
+  color: #5ba3ff;
+}
+
+body.dark-mode .modal-content.detail-modal {
+  border-color: #5ba3ff;
+}
+
+body.dark-mode .theme-toggle-btn {
+  background: #5ba3ff;
+}
+
+body.dark-mode .theme-toggle-btn:hover {
+  background: #4a92e6;
+}
+
+body.dark-mode .candidate-card {
+  color: #e0e0e0;
+}
+
+/* ===== ANALYTICS DASHBOARD ===== */
+.analytics-dashboard {
+  background: linear-gradient(135deg, #f3f6ff 0%, #e8ecff 100%);
+  padding: 25px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 2px solid #1a4ed8;
+}
+
+body.dark-mode .analytics-dashboard {
+  background: linear-gradient(135deg, #2a3a4a 0%, #1f2a3a 100%);
+  border-color: #5ba3ff;
+}
+
+.analytics-dashboard h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #1a4ed8;
+}
+
+body.dark-mode .analytics-dashboard h2 {
+  color: #5ba3ff;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.stat-box {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #1a4ed8;
+  transition: all 0.3s ease;
+}
+
+.stat-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(26, 78, 216, 0.2);
+}
+
+body.dark-mode .stat-box {
+  background: #3a3a3a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border-left-color: #5ba3ff;
+  color: #e0e0e0;
+}
+
+.stat-number {
+  font-size: 32px;
+  font-weight: bold;
+  color: #1a4ed8;
+  margin-bottom: 8px;
+}
+
+body.dark-mode .stat-number {
+  color: #5ba3ff;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+body.dark-mode .stat-label {
+  color: #b0b0b0;
+}
+
+.skills-section {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .skills-section {
+  background: #3a3a3a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  color: #e0e0e0;
+}
+
+.skills-section h3 {
+  margin-top: 0;
+  color: #1a4ed8;
+}
+
+body.dark-mode .skills-section h3 {
+  color: #5ba3ff;
+}
+
+.skills-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.skill-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  margin-bottom: 8px;
+  background: #f3f6ff;
+  border-left: 3px solid #1a4ed8;
+  border-radius: 4px;
+}
+
+body.dark-mode .skill-item {
+  background: #2a3a4a;
+  border-left-color: #5ba3ff;
+  color: #e0e0e0;
+}
+
+.skill-name {
+  font-weight: 500;
+  flex: 1;
+}
+
+.skill-count {
+  background: #1a4ed8;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+body.dark-mode .skill-count {
+  background: #5ba3ff;
+  color: #1a1a1a;
+}
+

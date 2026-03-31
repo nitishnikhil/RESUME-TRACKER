@@ -16,6 +16,103 @@ const searchBtn = document.getElementById("searchBtn");
 const clearSearchBtn = document.getElementById("clearSearchBtn");
 const adminResumeList = document.getElementById("adminResumeList");
 
+// Theme Toggle Elements
+const themeToggleBtn = document.getElementById("themeToggleBtn");
+
+// ===== THEME TOGGLE =====
+// Initialize theme from localStorage
+function initializeTheme() {
+  const savedTheme = localStorage.getItem("theme") || "light";
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark-mode");
+    themeToggleBtn.textContent = "☀️ Light Mode";
+  }
+}
+
+themeToggleBtn.addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+  const isDarkMode = document.body.classList.contains("dark-mode");
+  localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+  themeToggleBtn.textContent = isDarkMode ? "☀️ Light Mode" : "🌙 Dark Mode";
+});
+
+// Initialize theme on load
+initializeTheme();
+
+// ===== ANALYTICS FUNCTIONS =====
+function calculateAnalytics(candidates) {
+  const now = new Date();
+  const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+  const oneMonthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+
+  let weeksUploads = 0;
+  let monthUploads = 0;
+  const skillsMap = {};
+
+  candidates.forEach(candidate => {
+    const uploadDate = new Date(candidate.uploadedAt);
+    
+    // Count uploads this week and month
+    if (uploadDate >= oneWeekAgo) {
+      weeksUploads++;
+    }
+    if (uploadDate >= oneMonthAgo) {
+      monthUploads++;
+    }
+
+    // Collect skills
+    if (candidate.skills) {
+      const skillsArray = candidate.skills
+        .split(",")
+        .map(skill => skill.trim().toLowerCase())
+        .filter(skill => skill.length > 0);
+
+      skillsArray.forEach(skill => {
+        skillsMap[skill] = (skillsMap[skill] || 0) + 1;
+      });
+    }
+  });
+
+  // Get top 5 skills
+  const topSkills = Object.entries(skillsMap)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5);
+
+  return {
+    total: candidates.length,
+    weeksUploads,
+    monthUploads,
+    topSkills
+  };
+}
+
+function displayAnalytics(candidates) {
+  const analytics = calculateAnalytics(candidates);
+
+  // Update stats
+  document.getElementById("totalResumes").textContent = analytics.total;
+  document.getElementById("weeksUploads").textContent = analytics.weeksUploads;
+  document.getElementById("monthUploads").textContent = analytics.monthUploads;
+
+  // Display top skills
+  const topSkillsList = document.getElementById("topSkillsList");
+  topSkillsList.innerHTML = "";
+
+  if (analytics.topSkills.length === 0) {
+    topSkillsList.innerHTML = "<p style='color: #999; text-align: center;'>No skills data available</p>";
+  } else {
+    analytics.topSkills.forEach(([skill, count]) => {
+      const skillItem = document.createElement("div");
+      skillItem.className = "skill-item";
+      skillItem.innerHTML = `
+        <span class="skill-name">${skill.charAt(0).toUpperCase() + skill.slice(1)}</span>
+        <span class="skill-count">${count} ${count === 1 ? "resume" : "resumes"}</span>
+      `;
+      topSkillsList.appendChild(skillItem);
+    });
+  }
+}
+
 // ===== PAGE NAVIGATION =====
 candidateBtn.addEventListener("click", () => {
   loginPage.style.display = "none";
@@ -117,6 +214,9 @@ async function loadAdminResumes() {
     const res = await fetch("/api/resumes/list");
     const data = await res.json();
 
+    // Display analytics
+    displayAnalytics(data);
+
     displayAdminResumes(data);
   } catch (err) {
     console.error(err);
@@ -146,8 +246,7 @@ searchBtn.addEventListener("click", async () => {
 
     if (!data || data.length === 0) {
       adminResumeList.innerHTML = `<li>No candidates found with skills: "${skills}"</li>`;
-    } else {
-      displayAdminResumes(data);
+    } else {      displayAnalytics(data);      displayAdminResumes(data);
     }
   } catch (err) {
     console.error("Search error:", err);
