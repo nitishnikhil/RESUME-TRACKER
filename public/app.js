@@ -1,6 +1,12 @@
 const form = document.getElementById("resumeForm");
 const list = document.getElementById("resumeList");
 
+// Landing Page Elements
+const landingPage = document.getElementById("landingPage");
+const getStartedBtn = document.getElementById("getStartedBtn");
+const desktopLoginBtn = document.getElementById("desktopLoginBtn");
+const backToLandingBtn = document.getElementById("backToLandingBtn");
+
 // Login Page Elements
 const loginPage = document.getElementById("loginPage");
 const candidatePage = document.getElementById("candidatePage");
@@ -114,6 +120,23 @@ function displayAnalytics(candidates) {
 }
 
 // ===== PAGE NAVIGATION =====
+// Landing Page Navigation
+getStartedBtn.addEventListener("click", () => {
+  landingPage.style.display = "none";
+  loginPage.style.display = "flex";
+});
+
+desktopLoginBtn.addEventListener("click", () => {
+  landingPage.style.display = "none";
+  loginPage.style.display = "flex";
+});
+
+backToLandingBtn.addEventListener("click", () => {
+  loginPage.style.display = "none";
+  landingPage.style.display = "block";
+});
+
+// Login to Candidate/Admin
 candidateBtn.addEventListener("click", () => {
   loginPage.style.display = "none";
   candidatePage.style.display = "block";
@@ -130,9 +153,10 @@ logoutCandidateBtn.addEventListener("click", logout);
 logoutAdminBtn.addEventListener("click", logout);
 
 function logout() {
-  loginPage.style.display = "block";
+  loginPage.style.display = "none";
   candidatePage.style.display = "none";
   adminPage.style.display = "none";
+  landingPage.style.display = "block";
   form.reset();
   skillsSearchInput.value = "";
   adminResumeList.innerHTML = "";

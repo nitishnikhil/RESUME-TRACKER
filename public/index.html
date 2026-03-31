@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Resume Tracker</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -10,9 +11,98 @@
   <div class="theme-toggle-container">
     <button id="themeToggleBtn" class="theme-toggle-btn" title="Toggle Dark Mode">🌙 Dark Mode</button>
   </div>
+
+  <!-- Landing Page -->
+  <div id="landingPage" class="landing-page">
+    <nav class="navbar">
+      <div class="navbar-container">
+        <div class="logo">📄 Resume Tracker</div>
+        <button id="desktopLoginBtn" class="nav-login-btn">Get Started</button>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Resume Tracker</h1>
+        <p>Manage and organize resumes efficiently with cloud-based storage</p>
+        <button id="getStartedBtn" class="cta-btn">Get Started</button>
+      </div>
+    </section>
+
+    <section class="features">
+      <h2>Features</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📤</div>
+          <h3>Easy Upload</h3>
+          <p>Quickly upload and store resumes with candidate information</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔍</div>
+          <h3>Smart Search</h3>
+          <p>Find candidates by skill set with advanced filtering</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>Analytics</h3>
+          <p>View statistics and insights about resume uploads</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🌙</div>
+          <h3>Dark Mode</h3>
+          <p>Comfortable reading with dark mode support</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">☁️</div>
+          <h3>Cloud Storage</h3>
+          <p>Secure storage on Azure cloud infrastructure</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔐</div>
+          <h3>Secure Access</h3>
+          <p>Role-based access control for candidates and admins</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="about">
+      <h2>About Resume Tracker</h2>
+      <p>Resume Tracker is a modern, full-stack application designed to simplify resume management. Built with Node.js, Express, and Azure cloud services, it provides a seamless experience for both job candidates and recruiters.</p>
+      <p><strong>Technologies Used:</strong> Node.js, Express.js, Azure Cosmos DB, Azure Blob Storage</p>
+    </section>
+
+    <section class="contact">
+      <h2>Connect With Me</h2>
+      <div class="contact-links">
+        <a href="https://www.linkedin.com/in/nitish-nikhil/" target="_blank" class="contact-link">
+          <span class="contact-icon">🔗</span>
+          <span>LinkedIn</span>
+        </a>
+        <a href="https://www.facebook.com/nitishkumarsingh.sh.3" target="_blank" class="contact-link">
+          <span class="contact-icon">👥</span>
+          <span>Facebook</span>
+        </a>
+        <a href="https://wa.me/8521993622" target="_blank" class="contact-link">
+          <span class="contact-icon">💬</span>
+          <span>WhatsApp</span>
+        </a>
+        <a href="https://github.com/nitishnikhil/RESUME-TRACKER.git" target="_blank" class="contact-link">
+          <span class="contact-icon">💻</span>
+          <span>GitHub</span>
+        </a>
+      </div>
+      <p class="contact-phone">📞 <strong>+91 8521993622</strong></p>
+    </section>
+
+    <footer class="footer">
+      <p>&copy; 2026 Resume Tracker. All rights reserved. | Built with ❤️ by Nitish Nikhil</p>
+    </footer>
+  </div>
+
   <!-- Login Page -->
-  <div id="loginPage" class="login-container">
+  <div id="loginPage" class="login-container" style="display: none;">
     <div class="login-card">
+      <button id="backToLandingBtn" class="back-btn">← Back</button>
       <h1>Resume Tracker</h1>
       <p>Select your role to continue</p>
       <div class="login-buttons">
