@@ -89,10 +89,18 @@ async function loadResumes() {
     data.forEach(item => {
       const li = document.createElement("li");
       li.innerHTML = `
-        <span>${item.name || "Candidate"} - ${item.email}</span>
-        <a href="${item.resumeUrl}" target="_blank">Download</a>
+        <span class="candidate-name-email">${item.name || "Candidate"} - ${item.email}</span>
+        <button class="download-btn-restricted" data-resume-name="${item.name || 'Resume'}">Download</button>
       `;
       list.appendChild(li);
+    });
+
+    // Add event listeners to all download buttons
+    document.querySelectorAll(".download-btn-restricted").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        showAccessDeniedModal();
+      });
     });
   } catch (err) {
     console.error(err);
@@ -182,6 +190,34 @@ function displayAdminResumes(data) {
     adminResumeList.appendChild(li);
   });
 }
+
+// ===== MODAL FUNCTIONS =====
+const accessDeniedModal = document.getElementById("accessDeniedModal");
+const closeModal = accessDeniedModal.querySelector(".close-modal");
+const goToAdminBtn = document.getElementById("goToAdminBtn");
+
+function showAccessDeniedModal() {
+  accessDeniedModal.style.display = "block";
+}
+
+function hideAccessDeniedModal() {
+  accessDeniedModal.style.display = "none";
+}
+
+closeModal.addEventListener("click", hideAccessDeniedModal);
+
+goToAdminBtn.addEventListener("click", () => {
+  hideAccessDeniedModal();
+  logout();
+  adminBtn.click();
+});
+
+// Close modal when clicking outside of it
+accessDeniedModal.addEventListener("click", (e) => {
+  if (e.target === accessDeniedModal) {
+    hideAccessDeniedModal();
+  }
+});
 
 // Initial load
 loginPage.style.display = "block";

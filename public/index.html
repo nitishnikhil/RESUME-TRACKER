@@ -39,7 +39,20 @@
 
       <!-- Uploaded Resumes -->
       <h2>Uploaded Resumes</h2>
-      <ul id="resumeList"></ul>
+      <div id="resumeListContainer">
+        <ul id="resumeList"></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Access Denied Popup Modal -->
+  <div id="accessDeniedModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Download Restricted</h2>
+      <p>You don't have permission to download resumes directly.</p>
+      <p><strong>Please log in as Admin to download resumes.</strong></p>
+      <button id="goToAdminBtn" class="modal-btn">Go to Admin Login</button>
     </div>
   </div>
 

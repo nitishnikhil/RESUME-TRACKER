@@ -229,6 +229,10 @@ li {
   border-radius: 5px;
   border-left: 4px solid #1a4ed8;
   word-wrap: break-word;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
 }
 
 /* ===== CANDIDATE CARD ===== */
@@ -281,5 +285,112 @@ hr {
   border: none;
   border-top: 2px solid #e0e7ff;
   margin: 20px 0;
+}
+
+/* ===== MODAL STYLES ===== */
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  animation: fadeIn 0.3s ease-in;
+}
+
+.modal-content {
+  background-color: #fefcbf;
+  margin: 15% auto;
+  padding: 30px;
+  border: 2px solid #f97316;
+  border-radius: 10px;
+  width: 400px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  color: #d97706;
+}
+
+.modal-content p {
+  margin: 15px 0;
+  color: #333;
+  font-size: 14px;
+}
+
+.close-modal {
+  color: #f97316;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+  color: #d97706;
+}
+
+.modal-btn {
+  background: #f97316;
+  color: white;
+  padding: 12px 20px;
+  width: auto;
+  margin-top: 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.modal-btn:hover {
+  background: #d97706;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(249, 115, 22, 0.4);
+}
+
+/* ===== RESTRICTED DOWNLOAD BUTTON ===== */
+.download-btn-restricted {
+  background: #ef4444;
+  color: white;
+  padding: 8px 12px;
+  width: auto;
+  margin: 0;
+  border: none;
+  border-radius: 5px;
+  cursor: not-allowed;
+  font-weight: bold;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.download-btn-restricted:hover {
+  background: #dc2626;
+  cursor: pointer;
+}
+
+.candidate-name-email {
+  flex: 1;
+  color: #333;
+  font-weight: 500;
 }
 
