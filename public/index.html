@@ -56,6 +56,30 @@
     </div>
   </div>
 
+  <!-- Candidate Detail Modal (Admin) -->
+  <div id="candidateDetailModal" class="modal" style="display: none;">
+    <div class="modal-content detail-modal">
+      <span class="close-modal" id="closeDetailModal">&times;</span>
+      <h2 id="detailModalName">Candidate Details</h2>
+      
+      <div class="detail-section">
+        <p><strong>Name:</strong> <span id="detailName"></span></p>
+        <p><strong>Email:</strong> <span id="detailEmail"></span></p>
+        <p><strong>Skills:</strong> <span id="detailSkills"></span></p>
+        <p><strong>Uploaded:</strong> <span id="detailUploadedAt"></span></p>
+      </div>
+
+      <div class="detail-actions">
+        <a id="detailDownloadBtn" href="#" class="action-btn download-btn" download>
+          📥 Download Resume
+        </a>
+        <button id="detailDeleteBtn" class="action-btn delete-btn">
+          🗑️ Delete Resume
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Admin Page -->
   <div id="adminPage" class="page" style="display: none;">
     <div class="container">

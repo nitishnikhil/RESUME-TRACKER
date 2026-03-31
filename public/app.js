@@ -174,20 +174,25 @@ function displayAdminResumes(data) {
     const li = document.createElement("li");
     const skillsText = item.skills ? `<strong>Skills:</strong> ${item.skills}` : "";
     
-    console.log("Resume item:", item);
-    console.log("Resume URL:", item.resumeUrl);
-    
     li.innerHTML = `
-      <div class="candidate-card">
+      <div class="candidate-card clickable-card" data-candidate-id="${item.id}" data-candidate-json='${JSON.stringify(item)}'>
         <div class="candidate-info">
           <h3>${item.name || "Candidate"}</h3>
           <p><strong>Email:</strong> ${item.email}</p>
           ${skillsText ? `<p>${skillsText}</p>` : ""}
         </div>
-        <a href="${item.resumeUrl}" target="_blank" class="download-link">Download Resume</a>
+        <div class="card-action">📋 View Details</div>
       </div>
     `;
     adminResumeList.appendChild(li);
+    
+    // Add click handler to card
+    const card = li.querySelector(".clickable-card");
+    card.addEventListener("click", (e) => {
+      e.preventDefault();
+      const candidateData = JSON.parse(card.dataset.candidateJson);
+      showCandidateDetailModal(candidateData);
+    });
   });
 }
 
@@ -195,6 +200,12 @@ function displayAdminResumes(data) {
 const accessDeniedModal = document.getElementById("accessDeniedModal");
 const closeModal = accessDeniedModal.querySelector(".close-modal");
 const goToAdminBtn = document.getElementById("goToAdminBtn");
+const candidateDetailModal = document.getElementById("candidateDetailModal");
+const closeDetailModal = document.getElementById("closeDetailModal");
+const detailDownloadBtn = document.getElementById("detailDownloadBtn");
+const detailDeleteBtn = document.getElementById("detailDeleteBtn");
+
+let currentCandidateData = null;
 
 function showAccessDeniedModal() {
   accessDeniedModal.style.display = "block";
@@ -204,7 +215,30 @@ function hideAccessDeniedModal() {
   accessDeniedModal.style.display = "none";
 }
 
+function showCandidateDetailModal(candidateData) {
+  currentCandidateData = candidateData;
+  
+  document.getElementById("detailModalName").textContent = candidateData.name || "Candidate";
+  document.getElementById("detailName").textContent = candidateData.name || "N/A";
+  document.getElementById("detailEmail").textContent = candidateData.email || "N/A";
+  document.getElementById("detailSkills").textContent = candidateData.skills || "N/A";
+  
+  const uploadDate = new Date(candidateData.uploadedAt).toLocaleDateString();
+  document.getElementById("detailUploadedAt").textContent = uploadDate;
+  
+  detailDownloadBtn.href = candidateData.resumeUrl;
+  detailDownloadBtn.download = `${candidateData.name || "resume"}.pdf`;
+  
+  candidateDetailModal.style.display = "block";
+}
+
+function hideCandidateDetailModal() {
+  candidateDetailModal.style.display = "none";
+  currentCandidateData = null;
+}
+
 closeModal.addEventListener("click", hideAccessDeniedModal);
+closeDetailModal.addEventListener("click", hideCandidateDetailModal);
 
 goToAdminBtn.addEventListener("click", () => {
   hideAccessDeniedModal();
@@ -212,10 +246,59 @@ goToAdminBtn.addEventListener("click", () => {
   adminBtn.click();
 });
 
+detailDeleteBtn.addEventListener("click", async () => {
+  if (!currentCandidateData) return;
+  
+  const confirmDelete = confirm(
+    `Are you sure you want to delete the resume for ${currentCandidateData.name}? This action cannot be undone.`
+  );
+  
+  if (!confirmDelete) return;
+  
+  try {
+    detailDeleteBtn.disabled = true;
+    detailDeleteBtn.textContent = "Deleting...";
+    
+    const res = await fetch(`/api/resumes/delete/${currentCandidateData.id}`, {
+      method: "DELETE"
+    });
+    
+    const data = await res.json();
+    
+    if (!res.ok) {
+      alert(data.error || "Failed to delete resume");
+      detailDeleteBtn.disabled = false;
+      detailDeleteBtn.textContent = "🗑️ Delete Resume";
+      return;
+    }
+    
+    alert("Resume deleted successfully!");
+    hideCandidateDetailModal();
+    
+    // Reload the appropriate list
+    if (skillsSearchInput.value.trim()) {
+      searchBtn.click();
+    } else {
+      loadAdminResumes();
+    }
+  } catch (err) {
+    console.error("Delete error:", err);
+    alert("Error deleting resume");
+    detailDeleteBtn.disabled = false;
+    detailDeleteBtn.textContent = "🗑️ Delete Resume";
+  }
+});
+
 // Close modal when clicking outside of it
 accessDeniedModal.addEventListener("click", (e) => {
   if (e.target === accessDeniedModal) {
     hideAccessDeniedModal();
+  }
+});
+
+candidateDetailModal.addEventListener("click", (e) => {
+  if (e.target === candidateDetailModal) {
+    hideCandidateDetailModal();
   }
 });
 

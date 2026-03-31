@@ -50,4 +50,14 @@ async function searchCandidatesBySkills(skillsQuery) {
   }
 }
 
-module.exports = { saveCandidate, getCandidates, searchCandidatesBySkills };
+async function deleteCandidate(candidateId) {
+  try {
+    const { resource } = await container.item(candidateId, candidateId).delete();
+    return resource;
+  } catch (err) {
+    console.error("Error deleting candidate:", err);
+    throw err;
+  }
+}
+
+module.exports = { saveCandidate, getCandidates, searchCandidatesBySkills, deleteCandidate };

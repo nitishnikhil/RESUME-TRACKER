@@ -62,4 +62,21 @@ router.get("/search", async (req, res) => {
   }
 });
 
+// Delete candidate by ID
+router.delete("/delete/:id", async (req, res) => {
+  try {
+    const candidateId = req.params.id;
+    const result = await deleteCandidate(candidateId);
+    
+    if (result) {
+      res.json({ message: "Resume deleted successfully" });
+    } else {
+      res.status(404).json({ error: "Candidate not found" });
+    }
+  } catch (err) {
+    console.error("Delete error:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
 module.exports = router;
