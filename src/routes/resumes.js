@@ -1,7 +1,7 @@
 const express = require("express");
 const multer = require("multer");
 const { uploadToBlob } = require("../services/blobService");
-const { saveCandidate, getCandidates, searchCandidatesBySkills } = require("../services/cosmosService");
+const { saveCandidate, getCandidates, searchCandidatesBySkills, deleteCandidate } = require("../services/cosmosService");
 
 const router = express.Router();
 const upload = multer();
@@ -24,6 +24,7 @@ router.post("/upload", upload.single("resume"), async (req, res) => {
       skills: req.body.skills,
       tech: req.body.tech,
       resumeUrl: blobUrl,
+      fileSize: file.size,
       uploadedAt: new Date(),
     };
 

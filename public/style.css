@@ -395,23 +395,19 @@ hr {
 }
 
 /* ===== CLICKABLE CARD & DETAIL MODAL ===== */
-.clickable-card {
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.clickable-card:hover {
-  background: #e0e7ff !important;
-  box-shadow: 0 4px 12px rgba(26, 78, 216, 0.3);
-  transform: translateY(-2px);
-}
-
 .card-action {
   font-size: 12px;
   color: #1a4ed8;
   font-weight: bold;
   white-space: nowrap;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.card-action:hover {
+  text-decoration: underline;
 }
 
 /* Detail Modal Styling */

@@ -175,21 +175,23 @@ function displayAdminResumes(data) {
     const skillsText = item.skills ? `<strong>Skills:</strong> ${item.skills}` : "";
     
     li.innerHTML = `
-      <div class="candidate-card clickable-card" data-candidate-id="${item.id}" data-candidate-json='${JSON.stringify(item)}'>
+      <div class="candidate-card" data-candidate-id="${item.id}" data-candidate-json='${JSON.stringify(item)}'>
         <div class="candidate-info">
           <h3>${item.name || "Candidate"}</h3>
           <p><strong>Email:</strong> ${item.email}</p>
           ${skillsText ? `<p>${skillsText}</p>` : ""}
         </div>
-        <div class="card-action">📋 View Details</div>
+        <button class="card-action" style="border: none; background: none; cursor: pointer; padding: 0; font-size: 12px; color: #1a4ed8; font-weight: bold;">📋 View Details</button>
       </div>
     `;
     adminResumeList.appendChild(li);
     
-    // Add click handler to card
-    const card = li.querySelector(".clickable-card");
-    card.addEventListener("click", (e) => {
+    // Add click handler only to View Details button
+    const viewBtn = li.querySelector(".card-action");
+    viewBtn.addEventListener("click", (e) => {
       e.preventDefault();
+      e.stopPropagation();
+      const card = e.target.closest(".candidate-card");
       const candidateData = JSON.parse(card.dataset.candidateJson);
       showCandidateDetailModal(candidateData);
     });
@@ -222,6 +224,14 @@ function showCandidateDetailModal(candidateData) {
   document.getElementById("detailName").textContent = candidateData.name || "N/A";
   document.getElementById("detailEmail").textContent = candidateData.email || "N/A";
   document.getElementById("detailSkills").textContent = candidateData.skills || "N/A";
+  
+  // Format file size
+  let fileSizeText = "N/A";
+  if (candidateData.fileSize) {
+    const sizeInKB = (candidateData.fileSize / 1024).toFixed(2);
+    fileSizeText = `${sizeInKB} KB`;
+  }
+  document.getElementById("detailFileSize").textContent = fileSizeText;
   
   const uploadDate = new Date(candidateData.uploadedAt).toLocaleDateString();
   document.getElementById("detailUploadedAt").textContent = uploadDate;
