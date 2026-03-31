@@ -52,8 +52,30 @@ async function searchCandidatesBySkills(skillsQuery) {
 
 async function deleteCandidate(candidateId) {
   try {
-    const { resource } = await container.item(candidateId, candidateId).delete();
-    return resource;
+    console.log("Attempting to delete candidate with ID:", candidateId);
+    
+    // Query to find the candidate by ID first
+    const { resources } = await container.items
+      .query("SELECT * FROM c WHERE c.id = @id", { 
+        parameters: [{ name: "@id", value: candidateId }] 
+      })
+      .fetchAll();
+    
+    console.log("Query results found:", resources.length);
+    
+    // Try to delete regardless of whether query found it
+    // This handles different partition key scenarios
+    try {
+      await container.item(candidateId, candidateId).delete();
+      console.log("Successfully deleted candidate:", candidateId);
+      return { success: true, message: "Deleted successfully" };
+    } catch (deleteErr) {
+      console.error("Delete operation failed:", deleteErr.message);
+      if (resources.length === 0) {
+        throw new Error("Candidate not found");
+      }
+      throw deleteErr;
+    }
   } catch (err) {
     console.error("Error deleting candidate:", err);
     throw err;

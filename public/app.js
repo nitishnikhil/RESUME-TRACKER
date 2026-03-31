@@ -225,13 +225,29 @@ function showCandidateDetailModal(candidateData) {
   document.getElementById("detailEmail").textContent = candidateData.email || "N/A";
   document.getElementById("detailSkills").textContent = candidateData.skills || "N/A";
   
-  // Format file size
-  let fileSizeText = "N/A";
-  if (candidateData.fileSize) {
+  // Format file size - try from fileSize field first, then from blob URL
+  if (candidateData.fileSize && candidateData.fileSize > 0) {
     const sizeInKB = (candidateData.fileSize / 1024).toFixed(2);
-    fileSizeText = `${sizeInKB} KB`;
+    document.getElementById("detailFileSize").textContent = `${sizeInKB} KB`;
+  } else if (candidateData.resumeUrl) {
+    // Try to fetch size from blob URL headers
+    fetch(candidateData.resumeUrl, { method: "HEAD" })
+      .then(response => {
+        const contentLength = response.headers.get("content-length");
+        if (contentLength) {
+          const sizeInKB = (parseInt(contentLength) / 1024).toFixed(2);
+          document.getElementById("detailFileSize").textContent = `${sizeInKB} KB`;
+        } else {
+          document.getElementById("detailFileSize").textContent = "File info unavailable";
+        }
+      })
+      .catch(err => {
+        console.error("Error fetching file size:", err);
+        document.getElementById("detailFileSize").textContent = "File info unavailable";
+      });
+  } else {
+    document.getElementById("detailFileSize").textContent = "File info unavailable";
   }
-  document.getElementById("detailFileSize").textContent = fileSizeText;
   
   const uploadDate = new Date(candidateData.uploadedAt).toLocaleDateString();
   document.getElementById("detailUploadedAt").textContent = uploadDate;
