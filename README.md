@@ -1,9 +1,14 @@
 # Resume Tracker
 
+## Live Demo
+👉[Open Resume Tracker]([https://YOUR-APP-NAME.azurewebsites.net/](https://resume-tracker-backend-api-b6gbhne5hzexf7c5.centralindia-01.azurewebsites.net/))
+
+## 📌 Project Description
+Resume Tracker is an Azure-based web application for uploading,
+storing, searching, and managing resumes.
 A full-stack application for managing and tracking resumes using Node.js, Express, Azure Cosmos DB, and Azure Blob Storage.
 
 ## Features
-
 - **Candidate Upload**: Upload resumes with name, email, and skills
 - **Secure Storage**: Files stored in Azure Blob Storage
 - **Admin Dashboard**: View analytics and manage resumes
