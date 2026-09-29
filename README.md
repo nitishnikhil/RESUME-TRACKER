@@ -1,7 +1,7 @@
 # Resume Tracker
 
 ## Live Demo
-**[Open Resume Tracker]([https://YOUR-APP-NAME.azurewebsites.net/](https://resume-tracker-backend-api-b6gbhne5hzexf7c5.centralindia-01.azurewebsites.net/))**
+**[~Open Resume Tracker](https://resume-tracker-backend-api-b6gbhne5hzexf7c5.centralindia-01.azurewebsites.net/)**
 
 ## 📌 Project Description
 Resume Tracker is an Azure-based web application for uploading,
